@@ -1,5 +1,5 @@
 {
-  "version": "0.0",
+  "version": "6.0",
   "packages": {
     "anatomist": ["anatomist-free", "https://github.com/brainvisa/anatomist-free.git", "master"],
     "bioprocessing": ["bioprocessing", "https://bioproj.extra.cea.fr/git/bioprocessing", "master"],
