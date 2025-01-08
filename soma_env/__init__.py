@@ -1,21 +1,13 @@
-__version__ = "0.0"
+import json
+import os
+import pathlib
 
-packages = {
-    "anatomist": ["anatomist-free", "https://github.com/brainvisa/anatomist-free.git", "soma-env-6.0"],
-    "bioprocessing": ["bioprocessing", "https://bioproj.extra.cea.fr/git/bioprocessing", "soma-env-6.0"],
-    "brainrat": ["brainrat-private", "https://bioproj.extra.cea.fr/git/brainrat-private", "soma-env-6.0"],
-    "capsul": ["capsul", "https://github.com/populse/capsul.git", "soma-env-6.0"],
-    "constellation": ["constellation-gpl", "https://github.com/brainvisa/constellation-gpl.git", "soma-env-6.0"],
-    "cortical-surface": ["cortical_surface-gpl", "https://github.com/brainvisa/cortical_surface-gpl.git", "soma-env-6.0"],
-    "disco": ["disco", "https://bioproj.extra.cea.fr/git/brainvisa-disco", "soma-env-6.0"],
-    "highres-cortex": ["highres-cortex", "https://github.com/neurospin/highres-cortex.git", "soma-env-6.0"],
-    "morphologist": ["morphologist-nonfree", "https://github.com/brainvisa/morphologist-nonfree.git", "soma-env-6.0"],
-    "morphologist-baby": ["morphologist-baby", "https://bioproj.extra.cea.fr/git/brainvisa-t1mri/morphologist-baby.git", "soma-env-6.0"],
-    "nuclear-imaging": ["nuclear_imaging-nonfree", "https://github.com/cati-neuroimaging/nuclear_imaging-nonfree.git", "soma-env-6.0"],
-    "populse-db": ["populse-db", "https://github.com/populse/populse_db.git", "soma-env-6.0"],
-    "primatologist": ["primatologist-gpl", "https://bioproj.extra.cea.fr/git/primatologist-gpl", "soma-env-6.0"],
-    "soma": ["soma-io", "https://github.com/brainvisa/soma-io.git", "soma-env-6.0"],
-    "soma-freesurfer": ["brainvisa_freesurfer", "https://github.com/brainvisa/brainvisa_freesurfer.git", "soma-env-6.0"],
-    "soma-python": ["soma-base", "https://github.com/populse/soma-base.git", "soma-env-6.0"],
-    "soma-spm": ["brainvisa-spm", "https://github.com/brainvisa/brainvisa-spm.git", "soma-env-6.0"],
-}
+
+conf_file = pathlib.Path(os.environ.get("SOMA_ROOT")) / "conf" / "soma-env.json"
+if conf_file.exists():
+    try:
+        with open(conf_file) as f:
+            conf = json.load(f)
+        __version__ = conf.get("version")
+    except Exception as e:
+        print(f"ERROR: {e}")
